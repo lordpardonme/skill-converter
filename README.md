@@ -11,7 +11,7 @@
 <p align="center">
   <a href="#installation"><img src="https://img.shields.io/badge/install-one%20command-brightgreen?style=for-the-badge" alt="Install" /></a>
   <a href="https://github.com/lordpardonme/skill-converter/stargazers"><img src="https://img.shields.io/github/stars/lordpardonme/skill-converter?style=for-the-badge&color=yellow" alt="Stars" /></a>
-  <a href="https://github.com/lordpardonme/skill-converter/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue?style=for-the-badge" alt="License" /></a>
+  <a href="https://github.com/lordpardonme/skill-converter/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-CC%20BY%204.0-blue?style=for-the-badge" alt="License" /></a>
   <a href="#supported-tools"><img src="https://img.shields.io/badge/tools-6%2B%20supported-purple?style=for-the-badge" alt="Supported Tools" /></a>
 </p>
 
@@ -210,9 +210,21 @@ Found a tool format we don't support? Open an issue or PR with:
 
 ---
 
-## 📄 License
+## 📄 License & Attribution
 
-MIT — use it, share it, convert everything.
+**CC BY 4.0** — you're free to use, copy, fork, and build on this. One rule:
+
+> **You must credit the original author.**
+
+If you copy this skill, fork the repo, or create a derivative:
+
+1. Keep the attribution line in `SKILL.md` (it's at the bottom)
+2. Link back to this repo: `https://github.com/lordpardonme/skill-converter`
+3. State if you made changes
+
+Removing the attribution notice violates the license.
+
+Full license: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
 
 ---
 

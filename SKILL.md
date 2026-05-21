@@ -78,3 +78,7 @@ Once confirmed, write the files to disk in the correct location for their tool.
 - Domain doesn't matter — convert design skills, marketing skills, dev skills, writing skills, anything
 
 See [REFERENCE.md](REFERENCE.md) for format maps per tool and description writing rules.
+
+---
+
+> **Attribution**: skill-converter by [Mohd Hayaat Ali (@lordpardonme)](https://github.com/lordpardonme/skill-converter). Licensed under CC BY 4.0. If you copy, fork, or build on this skill, you must credit the original author and link to the source repo. Removing this notice violates the license.
