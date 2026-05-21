@@ -23,7 +23,7 @@ npx skill-converter@latest
 
 1. **Ask for installation scope** — IDE-Specific (local project) or System-wide (Universal/global folder).
 2. **Ask for the skill source** — pasted content, GitHub link, attached file, or prompt command.
-3. **Extract & Convert** — pull every detail from the source and format it correctly for the target tool.
+3. **Extract & Convert** — extract details from the source or design the skill from scratch (if a prompt/command is given), formatting it correctly for the target tool.
 4. **Save and Auto-Install** — write files directly to the correct local or global folder.
 
 ## Rules
