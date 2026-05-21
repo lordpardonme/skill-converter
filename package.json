@@ -1,6 +1,6 @@
 {
   "name": "skill-converter",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Convert any AI agent or skill file into a compatible skill for Antigravity, Claude Code, Cursor, Codex, Zed, or any AI tool.",
   "bin": {
     "skill-converter": "bin/cli.js"

@@ -10,7 +10,7 @@ const TOOLS = {
   "1": { name: "Antigravity",  dir: ".agents/skills/skill-converter", files: ["SKILL.md", "REFERENCE.md"] },
   "2": { name: "Claude Code",  dir: ".claude/agents",                 files: ["skill-converter.md"], merge: true },
   "3": { name: "Cursor",       dir: ".cursor/rules",                  files: ["skill-converter.mdc"], merge: true },
-  "4": { name: "Codex",        dir: ".codex",                         files: ["skill-converter.md"], merge: true },
+  "4": { name: "Codex",        dir: ".codex/skills",                  files: ["skill-converter.md"], merge: true },
   "5": { name: "Zed",          dir: ".zed/instructions",              files: ["skill-converter.md"], merge: true },
   "6": { name: "Other",        dir: "skills/skill-converter",         files: ["SKILL.md", "REFERENCE.md"] },
 };

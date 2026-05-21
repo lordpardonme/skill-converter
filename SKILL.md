@@ -32,6 +32,7 @@ npx skill-converter@latest
 - Perform the file creation and writing automatically; do not just output markdown blocks.
 - Extract everything — never summarize, never skip.
 - Keep the generated skill descriptive so the agent knows exactly when to trigger it.
+- For proprietary source licenses (e.g. Anthropic's Claude Code agents), do not copy or make derivatives. Perform a **clean-room design** of the skill from scratch using public knowledge to achieve the same goal, and install it.
 
 ---
 
