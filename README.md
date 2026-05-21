@@ -54,7 +54,7 @@ Works with **any domain** — design, marketing, frontend, backend, DevOps, writ
 
 ## 📦 Installation
 
-### Option 1: One-line install (recommended)
+### Option 1: Full install (recommended)
 
 ```bash
 npx skill-converter@latest
@@ -62,12 +62,14 @@ npx skill-converter@latest
 
 This will:
 1. Ask what AI tool you're using
-2. Download and install the skill into the correct folder
+2. Download and install the **complete skill** (with full methodology) into the correct folder
 3. You're ready to go
 
-### Option 2: Manual install
+> ⚡ This is the only way to get the full conversion engine with format maps, extraction logic, and decision trees.
 
-Clone this repo and copy the files into your tool's skill directory:
+### Option 2: Lite version (manual)
+
+Clone this repo for the lite version:
 
 ```bash
 # Clone
@@ -83,9 +85,7 @@ cp skill-converter/SKILL.md .claude/agents/skill-converter.md
 cp skill-converter/SKILL.md .cursor/rules/skill-converter.mdc
 ```
 
-### Option 3: Just grab the files
-
-Download [`SKILL.md`](SKILL.md) and [`REFERENCE.md`](REFERENCE.md) directly and place them in your tool's skill folder.
+> ⚠️ The lite version includes the workflow but not the full format specifications. For the complete experience, use Option 1.
 
 ---
 
@@ -139,23 +139,23 @@ NN Group research and WCAG accessibility standards.
 
 ```
 skill-converter/
-├── SKILL.md           # The converter skill — workflow, triggers, rules
-├── REFERENCE.md       # Format maps per tool, extraction checklist, decision tree
+├── SKILL.md           # Lite version — workflow, triggers, rules
 ├── assets/
 │   └── banner.png     # Repo banner
+├── LICENSE            # CC BY 4.0
 └── README.md          # You're reading this
 ```
 
-### SKILL.md
+### SKILL.md (Public — Lite)
 
-The main skill file. Contains:
+The public skill file. Contains:
 - **Trigger conditions** — when should the converter activate
 - **6-step workflow** — ask tool → get source → extract → convert → present → write
 - **Rules** — never assume target, never skip extraction, always split large skills
 
-### REFERENCE.md
+### Full Methodology (via `npx` install only)
 
-The detailed reference. Contains:
+The complete conversion engine — available only through the CLI install. Includes:
 - **Format maps** for every supported tool (exact frontmatter, folder paths)
 - **Description writing rules** — how to write trigger-friendly descriptions
 - **Extraction checklist** — what to pull from every source file
