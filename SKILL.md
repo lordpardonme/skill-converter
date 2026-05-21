@@ -1,11 +1,11 @@
 ---
 name: skill-converter
-description: Converts any AI agent or skill file into a compatible skill for any AI coding tool. Accepts Claude Code agents, Cursor rules, GitHub links, or pasted skill content of any domain (design, marketing, frontend, backend, development, writing, etc.) and outputs a properly formatted .md skill file for the user's target tool. Use when user says "convert this skill", "I have a Claude agent I want to use here", "turn this into a skill", pastes a GitHub link to an agent/skill file, attaches a .md agent file, or wants to port a skill from one AI tool to another.
+description: Converts any AI agent or skill file into a compatible skill for any AI coding tool, saving and installing it automatically. Accepts Claude Code agents, Cursor rules, GitHub links, or pasted skill content of any domain (design, marketing, frontend, backend, development, writing, etc.) and outputs a properly formatted .md skill file for the user's target tool. Use when user says "convert this skill", "I have a Claude agent I want to use here", "turn this into a skill", pastes a GitHub link to an agent/skill file, attaches a .md agent file, or wants to port a skill from one AI tool to another.
 ---
 
 # Skill Converter
 
-Converts any AI agent or skill file — of any domain — into a `.md` skill file compatible with your AI tool of choice.
+Converts any AI agent or skill file — of any domain — into a `.md` or `.mdc` skill file and automatically installs it based on your choice.
 
 **Supports**: Antigravity, Claude Code, Cursor, Codex, Zed, and more.
 
@@ -21,33 +21,17 @@ npx skill-converter@latest
 
 ## Workflow Overview
 
-1. **Ask target tool** — which AI tool is the user converting to?
-2. **Get the source** — pasted content, GitHub link, or attached file
-3. **Extract** — pull every detail from the source (philosophy, workflows, rules, triggers, examples)
-4. **Convert** — restructure into the target tool's format
-5. **Present** — show the converted skill for review
-6. **Write** — save files to the correct location
+1. **Ask for installation scope** — IDE-Specific (local project) or System-wide (Universal/global folder).
+2. **Ask for the skill source** — pasted content, GitHub link, attached file, or prompt command.
+3. **Extract & Convert** — pull every detail from the source and format it correctly for the target tool.
+4. **Save and Auto-Install** — write files directly to the correct local or global folder.
 
 ## Rules
 
-- Always ask the target tool first — never assume
-- Extract everything — never summarize, never skip
-- Split large skills into multiple files if needed
-- Domain doesn't matter — design, marketing, dev, writing, anything
-- Always output `.md` files
-
-## Supported Targets
-
-| Tool | Status |
-|------|--------|
-| Antigravity | ✅ |
-| Claude Code | ✅ |
-| Cursor | ✅ |
-| Codex | ✅ |
-| Zed | ✅ |
-| Other | ✅ Generic |
-
-> Full format specifications, extraction checklists, and decision trees are included in the complete install.
+- Always ask the installation scope first — never assume.
+- Perform the file creation and writing automatically; do not just output markdown blocks.
+- Extract everything — never summarize, never skip.
+- Keep the generated skill descriptive so the agent knows exactly when to trigger it.
 
 ---
 

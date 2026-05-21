@@ -3,6 +3,8 @@
 const readline = require("readline");
 const fs = require("fs");
 const path = require("path");
+const os = require("os");
+const { exec } = require("child_process");
 
 const TOOLS = {
   "1": { name: "Antigravity",  dir: ".agents/skills/skill-converter", files: ["SKILL.md", "REFERENCE.md"] },
@@ -55,15 +57,19 @@ function getTemplateContent(filename) {
   return fs.readFileSync(templatePath, "utf-8");
 }
 
-async function main() {
-  banner();
+function spawnTerminal() {
+  const msg = "skill-converter has been installed system-wide! You can now run it in any IDE or terminal.";
+  if (process.platform === "win32") {
+    exec(`start cmd.exe /k "echo ${msg}"`);
+  } else if (process.platform === "darwin") {
+    exec(`osascript -e 'tell app "Terminal" to do script "echo \\"${msg}\\""'`);
+  } else {
+    exec(`x-terminal-emulator -e "echo '${msg}'; exec bash" || gnome-terminal -- bash -c "echo '${msg}'; exec bash" || xterm -e "echo '${msg}'; exec bash"`);
+  }
+}
 
-  const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout,
-  });
-
-  console.log(c("cyan", "  What AI tool are you installing this for?\n"));
+async function runLocalInstaller(rl) {
+  console.log(c("cyan", "\n  Which IDE or tool are you installing this for?\n"));
   console.log("  1) Antigravity");
   console.log("  2) Claude Code");
   console.log("  3) Cursor");
@@ -73,7 +79,6 @@ async function main() {
   console.log("");
 
   const choice = await ask(rl, c("yellow", "  Enter number (1-6): "));
-
   const tool = TOOLS[choice];
   if (!tool) {
     console.log(c("yellow", "\n  ⚠ Invalid choice. Run again and pick 1-6.\n"));
@@ -81,7 +86,7 @@ async function main() {
     process.exit(1);
   }
 
-  console.log(c("green", `\n  ✓ Installing for ${tool.name}...\n`));
+  console.log(c("green", `\n  ✓ Installing locally for ${tool.name}...\n`));
 
   const targetDir = path.resolve(process.cwd(), tool.dir);
   mkdirSafe(targetDir);
@@ -90,13 +95,11 @@ async function main() {
   const refContent = getTemplateContent("REFERENCE.md");
 
   if (tool.merge) {
-    // Single-file tools: merge SKILL.md + REFERENCE.md into one file
     const merged = skillContent + "\n\n---\n\n" + refContent;
     const outFile = path.join(targetDir, tool.files[0]);
     fs.writeFileSync(outFile, merged, "utf-8");
     console.log(c("dim", `  → ${path.relative(process.cwd(), outFile)}`));
   } else {
-    // Multi-file tools: write SKILL.md and REFERENCE.md separately
     const skillOut = path.join(targetDir, "SKILL.md");
     const refOut = path.join(targetDir, "REFERENCE.md");
     fs.writeFileSync(skillOut, skillContent, "utf-8");
@@ -105,15 +108,82 @@ async function main() {
     console.log(c("dim", `  → ${path.relative(process.cwd(), refOut)}`));
   }
 
-  console.log(c("green", "\n  ✅ Installed successfully!\n"));
-  console.log(c("white", `  The skill-converter is now ready in your ${tool.name} setup.`));
-  console.log(c("white", "  Just ask your AI agent to \"convert a skill\" and it'll know what to do.\n"));
-  console.log(c("dim", "  ─────────────────────────────────────────────────"));
-  console.log(c("dim", "  skill-converter by @lordpardonme • CC BY 4.0"));
-  console.log(c("dim", "  https://github.com/lordpardonme/skill-converter"));
-  console.log("");
+  console.log(c("green", "\n  ✅ Local installation completed successfully!\n"));
+  rl.close();
+}
+
+async function runGlobalInstaller(rl) {
+  console.log(c("green", "\n  ✓ Installing system-wide (Universal)...\n"));
+
+  const homeDir = os.homedir();
+  const skillContent = getTemplateContent("SKILL.md");
+  const refContent = getTemplateContent("REFERENCE.md");
+  const mergedContent = skillContent + "\n\n---\n\n" + refContent;
+
+  const globalTargets = [
+    // Antigravity global
+    { dir: path.join(homeDir, ".agents", "skills", "skill-converter"), files: ["SKILL.md", "REFERENCE.md"] },
+    // Claude Code global
+    { dir: path.join(homeDir, ".claude", "agents"), files: ["skill-converter.md"], merge: true },
+    // Cursor global
+    { dir: path.join(homeDir, ".cursor", "rules"), files: ["skill-converter.mdc"], merge: true },
+    // Codex global
+    { dir: path.join(homeDir, ".codex", "skills"), files: ["skill-converter.md"], merge: true },
+    // Zed global
+    { dir: path.join(homeDir, ".zed", "instructions"), files: ["skill-converter.md"], merge: true }
+  ];
+
+  for (const target of globalTargets) {
+    try {
+      mkdirSafe(target.dir);
+      if (target.merge) {
+        fs.writeFileSync(path.join(target.dir, target.files[0]), mergedContent, "utf-8");
+      } else {
+        fs.writeFileSync(path.join(target.dir, "SKILL.md"), skillContent, "utf-8");
+        fs.writeFileSync(path.join(target.dir, "REFERENCE.md"), refContent, "utf-8");
+      }
+      console.log(c("dim", `  → Installed in: ${target.dir}`));
+    } catch (err) {
+      console.log(c("dim", `  → Skipped path: ${target.dir} (${err.message})`));
+    }
+  }
+
+  console.log(c("green", "\n  ✅ System-wide installation completed successfully!\n"));
+  console.log(c("cyan", "  Opening a new terminal window...\n"));
+  
+  try {
+    spawnTerminal();
+  } catch (err) {
+    console.log(c("dim", `  Could not open new terminal window automatically: ${err.message}`));
+  }
 
   rl.close();
+}
+
+async function main() {
+  banner();
+
+  const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout,
+  });
+
+  console.log(c("cyan", "  Where would you like to install skill-converter?\n"));
+  console.log("  1) IDE-Specific (Local project directories)");
+  console.log("  2) Universal / System-wide (Global user folders)");
+  console.log("");
+
+  const choice = await ask(rl, c("yellow", "  Enter choice (1-2): "));
+
+  if (choice === "1") {
+    await runLocalInstaller(rl);
+  } else if (choice === "2") {
+    await runGlobalInstaller(rl);
+  } else {
+    console.log(c("yellow", "\n  ⚠ Invalid choice. Run again and pick 1 or 2.\n"));
+    rl.close();
+    process.exit(1);
+  }
 }
 
 main().catch((err) => {

@@ -54,64 +54,41 @@ Works with **any domain** — design, marketing, frontend, backend, DevOps, writ
 
 ## 📦 Installation
 
-### Option 1: Full install (recommended)
+Run the tool using `npx`:
 
 ```bash
 npx skill-converter@latest
 ```
 
-This will:
-1. Ask what AI tool you're using
-2. Download and install the **complete skill** (with full methodology) into the correct folder
-3. You're ready to go
+When you run it, you will choose the installation scope:
 
-> ⚡ This is the only way to get the full conversion engine with format maps, extraction logic, and decision trees.
-
-### Option 2: Lite version (manual)
-
-Clone this repo for the lite version:
-
-```bash
-# Clone
-git clone https://github.com/lordpardonme/skill-converter.git
-
-# For Antigravity — copy to skills folder
-cp -r skill-converter/ .agents/skills/skill-converter/
-
-# For Claude Code — copy SKILL.md as an agent
-cp skill-converter/SKILL.md .claude/agents/skill-converter.md
-
-# For Cursor — copy as a rule
-cp skill-converter/SKILL.md .cursor/rules/skill-converter.mdc
-```
-
-> ⚠️ The lite version includes the workflow but not the full format specifications. For the complete experience, use Option 1.
+1. **IDE-Specific (Local)**: Installs the converter skill locally in your current project folder. You will select which AI tool you are using (Antigravity, Claude Code, Cursor, Codex, Zed, or Other).
+2. **Universal / System-wide (Global)**: Installs the converter skill in your user home directory folders for all supported AI tools globally. 
+   - 💻 *Bonus*: When installed system-wide from a terminal, it automatically launches a new terminal window to confirm it is ready for use anywhere.
 
 ---
 
-## 🚀 Usage
+## 🚀 Usage (AI-Agent Conversion Flow)
 
-Once installed, just talk to your AI agent naturally:
+Once installed, just talk to your AI agent naturally in your IDE or terminal. Ask it to **"convert a skill"** or **"turn this Claude agent into a Cursor rule"**.
 
-```
-"Convert this Claude agent into a skill I can use here"
-```
+The agent follows this automatic 4-step workflow:
 
-```
-"I have this GitHub link to a Cursor rule, turn it into an Antigravity skill"
-```
+1. **Ask for target installation scope**: The agent asks whether the converted skill should be installed **IDE-Specific (local project)** or **System-wide (Universal / global folder)**.
+2. **Ask for the skill source**: The agent asks you to attach a file, paste a GitHub link, or write a prompt command.
+3. **Convert**: The agent processes the source, extracts all metadata and rules, and reformats it using the conversion engine.
+4. **Save and Auto-Install**: The agent automatically writes and installs the converted skill files to the correct target directory on your machine based on the scope chosen in Step 1.
 
-```
-"Here's a skill file — convert it for Codex"
-```
+### Supported Tools & Locations:
 
-### What happens:
-
-1. **The skill asks your target tool** — "What AI tool are you converting to?"
-2. **You share the source** — paste content, give a GitHub link, or attach a file
-3. **It extracts everything** — philosophy, workflows, rules, examples, anti-patterns, references
-4. **It converts** — outputs a properly formatted `.md` skill for your tool
-5. **It writes the files** — saves to the correct folder on your machine
+| Tool | Local Path (IDE-Specific) | Global Path (System-wide / Universal) |
+|------|---------------------------|----------------------------------------|
+| **Antigravity** | `.agents/skills/<name>/SKILL.md` | `~/.agents/skills/<name>/SKILL.md` |
+| **Claude Code** | `.claude/agents/<name>.md` | `~/.claude/agents/<name>.md` |
+| **Cursor** | `.cursor/rules/<name>.mdc` | `~/.cursor/rules/<name>.mdc` |
+| **Codex** | `.codex/skills/<name>.md` | `~/.codex/skills/<name>.md` |
+| **Zed** | `.zed/instructions/<name>.md` | `~/.zed/instructions/<name>.md` |
+| **Other** | `skills/<name>/SKILL.md` | `~/skills/<name>/SKILL.md` |
 
 ### Example: Converting a Claude Code agent → Antigravity skill
 
